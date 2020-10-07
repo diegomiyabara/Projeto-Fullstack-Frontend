@@ -8,6 +8,11 @@ function Header() {
     const goToLoginPage = () => {
         history.push("/login")
     }
+    const handleLogout = () => {
+        window.localStorage.clear()
+        history.push("/")
+        window.location.reload()
+    }
     const renderButton = () => {
         const token = window.localStorage.getItem("token")
         if(!token) {
@@ -19,7 +24,7 @@ function Header() {
         } else {
             return(
                 <ButtonContainer>
-                    <button>Logout</button>
+                    <Button onClick={handleLogout}>Logout</Button>
                 </ButtonContainer>
             )
         }
