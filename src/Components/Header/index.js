@@ -8,6 +8,12 @@ function Header() {
     const goToLoginPage = () => {
         history.push("/login")
     }
+    const goToSignUpPage = () => {
+        history.push("/signup")
+    }
+    const goToAlbunsPage = () => {
+        history.push("/albuns")
+    }
     const handleLogout = () => {
         window.localStorage.clear()
         history.push("/")
@@ -19,11 +25,13 @@ function Header() {
             return (
                 <ButtonContainer>
                     <Button onClick={goToLoginPage}>Login</Button>
+                    <Button onClick={goToSignUpPage}>Cadastre-se</Button>
                 </ButtonContainer>
             )
         } else {
             return(
                 <ButtonContainer>
+                    <Button onClick={goToAlbunsPage}>Álbuns</Button>
                     <Button onClick={handleLogout}>Logout</Button>
                 </ButtonContainer>
             )

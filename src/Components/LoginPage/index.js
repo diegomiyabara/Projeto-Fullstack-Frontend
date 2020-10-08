@@ -10,7 +10,7 @@ import logo from '../../Images/logo.png'
 function LoginPage() {
     const history = useHistory();
     const baseUrl = "https://pic-memories.herokuapp.com/user"
-    const {form, onChange} = useForm({emailOrNickname:"", password: ""})
+    const {form, onChange, resetForm} = useForm({emailOrNickname:"", password: ""})
     const handleInputChange = event => {
         const {name, value} = event.target
         onChange(name, value)
@@ -19,7 +19,7 @@ function LoginPage() {
     useEffect(() => {
         const token = window.localStorage.getItem("token")
         if(token !== null){
-            history.push("/albuns-list")
+            history.push("/albuns")
         }
     },[history])
 
@@ -33,10 +33,11 @@ function LoginPage() {
         .then(response => {
             window.localStorage.setItem("token", response.data.token)
             alert("Login feito com sucesso!")
-            history.push("/albuns-list")
+            history.push("/albuns")
         })
         .catch(err => {
             alert("Usuário/email ou senha inválidos!")
+            resetForm()
         })  
     }
     return(
