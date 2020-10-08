@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useHistory } from "react-router-dom";
 import axios from 'axios'
-import {MainContainer, LoginContainer, Img, LoginBox, ContainerInputs, Title, Button} from './styles'
+import {MainContainer, LoginContainer, Img, LoginBox, ContainerInputs, Title, Button, LoadingContainer, Yellow, Red, Blue, Violet} from './styles'
 import Header from '../Header'
 import {TextField} from '@material-ui/core'
 import useForm from '../../Hooks/useForm'
@@ -9,6 +9,7 @@ import logo from '../../Images/logo.png'
 
 function LoginPage() {
     const history = useHistory();
+    const [render, setRender] = useState(false)
     const baseUrl = "https://pic-memories.herokuapp.com/user"
     const {form, onChange, resetForm} = useForm({emailOrNickname:"", password: ""})
     const handleInputChange = event => {
@@ -23,8 +24,21 @@ function LoginPage() {
         }
     },[history])
 
+    const renderButton = () => {
+        if(!render) {
+            return (
+                <Button>Fazer Login</Button>
+            )
+        } else {
+            return(
+                <LoadingContainer><Yellow></Yellow><Red></Red><Blue></Blue><Violet></Violet></LoadingContainer>
+            )
+        }
+    }
+
     const handleLogin = (event) => {
         event.preventDefault()
+        setRender(true)
         const body = {
             emailOrNickname: form.emailOrNickname,
             password: form.password
@@ -37,6 +51,7 @@ function LoginPage() {
         })
         .catch(err => {
             alert("Usuário/email ou senha inválidos!")
+            setRender(false)
             resetForm()
         })  
     }
@@ -72,7 +87,7 @@ function LoginPage() {
                             />
                         </ContainerInputs>
                         <br></br>
-                        <Button>Fazer Login</Button>
+                        {renderButton()}
                     </form>
                 </LoginBox>
             </LoginContainer>

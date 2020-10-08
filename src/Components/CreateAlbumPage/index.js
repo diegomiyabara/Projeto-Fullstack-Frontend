@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useHistory } from "react-router-dom";
 import axios from 'axios'
-import {MainContainer, SignUpContainer, Img, SignUpBox, ContainerInputs, Title, Button} from './styles'
+import {MainContainer, SignUpContainer, Img, SignUpBox, ContainerInputs, Title, Button, LoadingContainer, Yellow, Red, Blue, Violet} from './styles'
 import Header from '../Header'
 import {TextField} from '@material-ui/core'
 import useForm from '../../Hooks/useForm'
@@ -9,6 +9,7 @@ import logo from '../../Images/logo.png'
 
 const CreateAlbumPage = () => {
     const history = useHistory();
+    const [render, setRender] = useState(false)
     const baseUrl = "https://pic-memories.herokuapp.com/album"
     const token = window.localStorage.getItem('token')
     const {form, onChange} = useForm({name:"", description: "", albumImageUrl: ""})
@@ -24,8 +25,21 @@ const CreateAlbumPage = () => {
         }
     },[history])
 
+    const renderButton = () => {
+        if(!render) {
+            return (
+                <Button>Criar Álbum</Button>
+            )
+        } else {
+            return(
+                <LoadingContainer><Yellow></Yellow><Red></Red><Blue></Blue><Violet></Violet></LoadingContainer>
+            )
+        }
+    }
+
     const handleSignUp = (event) => {
         event.preventDefault()
+        setRender(true)
         const body = {
             name: form.name,
             description: form.description,
@@ -42,6 +56,7 @@ const CreateAlbumPage = () => {
         })
         .catch(err => {
             alert(err.message)
+            setRender(false)
         })  
     }
     return(
@@ -86,7 +101,7 @@ const CreateAlbumPage = () => {
                             />
                         </ContainerInputs>
                         <br></br>
-                        <Button>Criar álbum</Button>
+                        {renderButton()}
                     </form>
                 </SignUpBox>
             </SignUpContainer>
