@@ -44,3 +44,74 @@ export const Button = styled.button`
         opacity: 90%;
     }
 `
+
+export const LoadingContainer = styled.div`
+    margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 50vh;
+
+    @keyframes bounce {
+	0%, 50%, 100% {
+		transform: scale(1);
+		filter: blur(0px);
+	}
+	25% {
+		transform: scale(0.6);
+		filter: blur(3px);
+	}
+	75% {
+		filter: blur(3px);
+		transform: scale(1.4);
+	}
+}
+`
+
+export const Yellow = styled.div`
+    width: 3vw;
+	height: 3vw;
+	border-radius: 100%;
+	margin: 2vw;
+	background-image: linear-gradient(145deg, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0) 100%);
+    animation: bounce 1.5s 0.5s linear infinite;
+    background-color: #feb60a;
+`
+
+export const Red = styled.div`
+    width: 3vw;
+	height: 3vw;
+	border-radius: 100%;
+	margin: 2vw;
+	background-image: linear-gradient(145deg, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0) 100%);
+    animation: bounce 1.5s 0.5s linear infinite;
+    background-color: #ff0062;
+    animation-delay: 0.1s;
+`
+
+export const Blue = styled.div`
+    width: 3vw;
+	height: 3vw;
+	border-radius: 100%;
+	margin: 2vw;
+	background-image: linear-gradient(145deg, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0) 100%);
+    animation: bounce 1.5s 0.5s linear infinite;
+    background-color: #00dbf9;
+    animation-delay: 0.2s;
+`
+
+export const Violet = styled.div`
+    width: 3vw;
+	height: 3vw;
+	border-radius: 100%;
+	margin: 2vw;
+	background-image: linear-gradient(145deg, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0) 100%);
+    animation: bounce 1.5s 0.5s linear infinite;
+    background-color: #da00f7;
+    animation-delay: 0.3s;
+`
+
+export const NoAlbumContainer = styled.div`
+    padding-top: 30px;
+    font-family: 'Roboto';
+`
