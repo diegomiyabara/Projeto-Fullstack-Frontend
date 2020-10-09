@@ -7,7 +7,7 @@ export const MainContainer = styled.div`
 
 export const SignUpContainer = styled.div`
     display: flex;
-    height: 80vh;
+    height: 70vh;
     flex-direction: column;
     justify-content: center;
 `
@@ -18,8 +18,8 @@ export const Img = styled.img`
 
 export const SignUpBox = styled.div`
     width: 400px;
-    height: 500px;
-    margin: 50px auto;
+    height: 350px;
+    margin: 20px auto;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -30,7 +30,7 @@ export const SignUpBox = styled.div`
 `
 
 export const ContainerInputs = styled.div`
-    height: 250px;
+    height: 200px;
     padding: 0 30px;
     display: flex;
     flex-direction: column;

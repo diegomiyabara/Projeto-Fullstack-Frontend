@@ -1,13 +1,13 @@
 import Axios from 'axios';
 import React, {useEffect, useState} from 'react'
 import { useHistory } from 'react-router-dom'
-import {MainContainer, AlbumContainer, StyledPaper, ButtonContainer, Button} from './styles'
+import {MainContainer, AlbumContainer, StyledPaper, ButtonContainer, Button, LoadingContainer, Yellow, Red, Blue, Violet, NoAlbumContainer} from './styles'
 import Header from '../Header'
 import notFoundImage from '../../Images/not-found.png'
 
 const AlbunsPage = () => {
     const history = useHistory();
-    const [albuns, setAlbuns] = useState([])
+    const [albuns, setAlbuns] = useState()
     const token = window.localStorage.getItem('token')
     const baseUrl = "https://pic-memories.herokuapp.com/album"
 
@@ -24,26 +24,28 @@ const AlbunsPage = () => {
                 setAlbuns(response.data.Albuns)
             })
             .catch((err) => {
-                alert("Autorização expirada, realize um novo login!")
+                alert("Sessão expirada, realize um novo login!")
                 window.localStorage.clear()
                 history.push("/login")
             })
         }
     }, [history, token])
 
-    console.log(albuns)
+    const goToCreateAlbumPage = () => {
+        history.push("/albuns/new")
+    }
 
     return(
         <MainContainer>
             <Header/>
             <h2>Álbuns</h2>
-            <ButtonContainer><Button>Novo Álbum</Button></ButtonContainer>
+            <ButtonContainer><Button onClick={goToCreateAlbumPage}>Novo Álbum</Button></ButtonContainer>
             <AlbumContainer>
-                {albuns.map((album) => {
+                {!albuns ? <LoadingContainer><Yellow></Yellow><Red></Red><Blue></Blue><Violet></Violet></LoadingContainer> : albuns.length === 0 ? <NoAlbumContainer>Você não possui nenhum álbum!</NoAlbumContainer> : albuns.map((album) => {
                     return(
                         <StyledPaper elevation={3} key={album.id}>
-                            <p>{album.name}</p>
-                            {album.albumImageUrl === "" ? <img src={notFoundImage} width="400px" alt="Not found"/> : <img src={album.albumImageUrl} alt="Album"/>}
+                            <h4>{album.name}</h4>
+                            {album.albumImageUrl === "" ? <img src={notFoundImage} width="400px" alt="Not found"/> : <img src={album.albumImageUrl} alt="Album" width="400px" />}
                             <p>{album.description}</p>
                         </StyledPaper>
                     )
