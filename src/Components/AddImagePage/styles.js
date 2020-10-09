@@ -5,9 +5,9 @@ export const MainContainer = styled.div`
     height: 100vh;
 `
 
-export const CreateAlbumContainer = styled.div`
+export const AddImageContainer = styled.div`
     display: flex;
-    height: 70vh;
+    height: 65vh;
     flex-direction: column;
     justify-content: center;
 `
@@ -16,9 +16,9 @@ export const Img = styled.img`
     margin: 0 auto;
 `
 
-export const CreateAlbumBox = styled.div`
+export const AddImageBox = styled.div`
     width: 400px;
-    height: 350px;
+    height: 300px;
     margin: 20px auto;
     display: flex;
     flex-direction: column;
@@ -30,7 +30,7 @@ export const CreateAlbumBox = styled.div`
 `
 
 export const ContainerInputs = styled.div`
-    height: 200px;
+    height: 120px;
     padding: 0 30px;
     display: flex;
     flex-direction: column;

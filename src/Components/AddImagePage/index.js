@@ -1,34 +1,34 @@
 import React, {useEffect, useState} from 'react'
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import axios from 'axios'
-import {MainContainer, CreateAlbumContainer, Img, CreateAlbumBox, ContainerInputs, Title, Button, LoadingContainer, Yellow, Red, Blue, Violet} from './styles'
+import {MainContainer, AddImageContainer, Img, AddImageBox, ContainerInputs, Title, Button, LoadingContainer, Yellow, Red, Blue, Violet} from './styles'
 import Header from '../Header'
 import {TextField} from '@material-ui/core'
 import useForm from '../../Hooks/useForm'
 import logo from '../../Images/logo.png'
 
-const CreateAlbumPage = () => {
+const AddImagePage = () => {
     const history = useHistory();
+    const params = useParams();
     const [render, setRender] = useState(false)
-    const baseUrl = "https://pic-memories.herokuapp.com/album"
+    const baseUrl = "https://pic-memories.herokuapp.com/image"
     const token = window.localStorage.getItem('token')
-    const {form, onChange} = useForm({name:"", description: "", albumImageUrl: ""})
+    const {form, onChange} = useForm({ description: "", photoUrl: ""})
     const handleInputChange = event => {
         const {name, value} = event.target
         onChange(name, value)
     }
     
     useEffect(() => {
-        const token = window.localStorage.getItem("token")
         if(!token){
             history.push("/login")
         }
-    },[history])
+    },[token, history])
 
     const renderButton = () => {
         if(!render) {
             return (
-                <Button>Criar Álbum</Button>
+                <Button>Adicionar foto</Button>
             )
         } else {
             return(
@@ -37,13 +37,13 @@ const CreateAlbumPage = () => {
         }
     }
 
-    const handleCreateAlbum = (event) => {
+    const handleAddImage = (event) => {
         event.preventDefault()
         setRender(true)
         const body = {
-            name: form.name,
             description: form.description,
-            albumImageUrl: form.albumImageUrl,
+            photoUrl: form.photoUrl,
+            album_id: params.albumId
         }
         axios.post(`${baseUrl}/`,body, {
             headers: {
@@ -51,8 +51,8 @@ const CreateAlbumPage = () => {
             }
         })
         .then(response => {
-            alert("Álbum cadastrado com sucesso!")
-            history.push("/albuns")
+            alert(`Foto adicionada ao álbum com sucesso!`)
+            history.push(`/album/${params.albumId}`)
         })
         .catch(err => {
             alert(err.message)
@@ -62,23 +62,12 @@ const CreateAlbumPage = () => {
     return(
         <MainContainer>
             <Header/>
-            <CreateAlbumContainer>
+            <AddImageContainer>
                 <Img src={logo} width="220px"/>
-                <CreateAlbumBox>
-                    <Title>Novo Álbum</Title>
-                    <form onSubmit={handleCreateAlbum}>
+                <AddImageBox>
+                    <Title>Adicionar Foto</Title>
+                    <form onSubmit={handleAddImage}>
                         <ContainerInputs>
-                            <TextField 
-                                label="Nome do Álbum" 
-                                variant="outlined"
-                                type="text"
-                                name="name"
-                                placeholder="Digite o nome do novo álbum"
-                                inputProps={{pattern: "^.{3,}", title:"O nome do álbum precisa ter no mínimo 3 caracteres"}}
-                                value={form.name}
-                                required
-                                onChange={handleInputChange}
-                            />
                             <TextField  
                                 label="Descrição" 
                                 variant="outlined"                      
@@ -91,22 +80,23 @@ const CreateAlbumPage = () => {
                                 onChange={handleInputChange}
                             />
                             <TextField  
-                                label="Insira a url da imagem do álbum" 
+                                label="Insira a url da foto" 
                                 variant="outlined"                      
                                 type="text" 
-                                name="albumImageUrl"
-                                placeholder="Digite seu nome de usuário"
-                                value={form.albumImageUrl} 
+                                name="photoUrl"
+                                placeholder="Insira a URL da foto."
+                                value={form.photoUrl} 
                                 onChange={handleInputChange}
+                                required
                             />
                         </ContainerInputs>
                         <br></br>
                         {renderButton()}
                     </form>
-                </CreateAlbumBox>
-            </CreateAlbumContainer>
+                </AddImageBox>
+            </AddImageContainer>
         </MainContainer>
     )
 }
 
-export default CreateAlbumPage
+export default AddImagePage

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import AddImagePage from './AddImagePage';
+import AlbumDetailPage from './AlbumDetailPage';
 import AlbunsPage from './AlbunsPage';
 import CreateAlbumPage from './CreateAlbumPage';
 import Home from "./Home/index";
@@ -21,6 +23,12 @@ function Router() {
                 </Route>
                 <Route exact path = "/albuns/new">
                     <CreateAlbumPage/>
+                </Route>
+                <Route exact path= "/album/:albumId">
+                    <AlbumDetailPage />
+                </Route>
+                <Route exact path= "/album/:albumId/image">
+                    <AddImagePage />
                 </Route>
                 <Route path="/">
                     <Home/>

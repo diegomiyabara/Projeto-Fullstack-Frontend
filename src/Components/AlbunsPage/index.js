@@ -35,6 +35,10 @@ const AlbunsPage = () => {
         history.push("/albuns/new")
     }
 
+    const goToAlbumDetailPage = (albumId) => {
+        history.push(`/album/${albumId}`)
+    }
+
     return(
         <MainContainer>
             <Header/>
@@ -43,7 +47,7 @@ const AlbunsPage = () => {
             <AlbumContainer>
                 {!albuns ? <LoadingContainer><Yellow></Yellow><Red></Red><Blue></Blue><Violet></Violet></LoadingContainer> : albuns.length === 0 ? <NoAlbumContainer>Você não possui nenhum álbum!</NoAlbumContainer> : albuns.map((album) => {
                     return(
-                        <StyledPaper elevation={3} key={album.id}>
+                        <StyledPaper elevation={3} key={album.id} onClick={() => goToAlbumDetailPage(album.id)}>
                             <h4>{album.name}</h4>
                             {album.albumImageUrl === "" ? <img src={notFoundImage} width="400px" alt="Not found"/> : <img src={album.albumImageUrl} alt="Album" width="400px" />}
                             <p>{album.description}</p>
