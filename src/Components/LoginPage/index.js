@@ -46,7 +46,6 @@ function LoginPage() {
         axios.post(`${baseUrl}/login`, body)
         .then(response => {
             window.localStorage.setItem("token", response.data.token)
-            alert("Login feito com sucesso!")
             history.push("/albuns")
         })
         .catch(err => {
