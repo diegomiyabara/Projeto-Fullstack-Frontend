@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useHistory } from "react-router-dom";
 import axios from 'axios'
-import {MainContainer, SignUpContainer, Img, SignUpBox, ContainerInputs, Title, Button} from './styles'
+import {MainContainer, SignUpContainer, Img, SignUpBox, ContainerInputs, Title, Button, LoadingContainer, Yellow, Red, Blue, Violet} from './styles'
 import Header from '../Header'
 import {TextField} from '@material-ui/core'
 import useForm from '../../Hooks/useForm'
@@ -9,6 +9,7 @@ import logo from '../../Images/logo.png'
 
 function SignUpPage() {
     const history = useHistory();
+    const [render, setRender] = useState(false)
     const baseUrl = "https://pic-memories.herokuapp.com/user"
     const {form, onChange} = useForm({name:"", email: "", nickname: "", password: ""})
     const handleInputChange = event => {
@@ -23,8 +24,21 @@ function SignUpPage() {
         }
     },[history])
 
+    const renderButton = () => {
+        if(!render) {
+            return (
+                <Button>Cadastrar</Button>
+            )
+        } else {
+            return(
+                <LoadingContainer><Yellow></Yellow><Red></Red><Blue></Blue><Violet></Violet></LoadingContainer>
+            )
+        }
+    }
+
     const handleSignUp = (event) => {
         event.preventDefault()
+        setRender(true)
         const body = {
             name: form.name,
             email: form.email,
@@ -38,6 +52,7 @@ function SignUpPage() {
             history.push("/albuns")
         })
         .catch(err => {
+            setRender(false)
             alert(err.message)
         })  
     }
@@ -95,7 +110,7 @@ function SignUpPage() {
                             />
                         </ContainerInputs>
                         <br></br>
-                        <Button>Cadastrar</Button>
+                        {renderButton()}
                     </form>
                 </SignUpBox>
             </SignUpContainer>
