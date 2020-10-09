@@ -44,6 +44,10 @@ const AlbumDetailPage = () => {
         history.push(`/album/${albumId}/image`)
     }
 
+    const goToImagePage = (imageId) => {
+        history.push(`/image/${imageId}`)
+    }
+
     return (
         <MainContainer>
             <Header/>
@@ -53,7 +57,7 @@ const AlbumDetailPage = () => {
                 {!images ? <LoadingContainer><Yellow></Yellow><Red></Red><Blue></Blue><Violet></Violet></LoadingContainer> : images.length === 0 ? <NoAlbumContainer>Você não possui nenhuma foto neste álbum!</NoAlbumContainer> : images.map((image) => {
                     return(
                         <StyledPaper elevation={3} key={image.id}>
-                            <img src={image.photoUrl} alt="Album" width="400px" />
+                            <img src={image.photoUrl} alt="Album" width="400px" cursor="pointer" onClick={() => goToImagePage(image.id)}/>
                             <ImageTitle>{image.description}</ImageTitle>
                         </StyledPaper>
                     )
