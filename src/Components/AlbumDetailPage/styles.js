@@ -1,48 +1,33 @@
-import styled from 'styled-components';
+import { Paper } from '@material-ui/core'
+import styled from 'styled-components'
 
 export const MainContainer = styled.div`
     background-color: #E9EAEA;
-    height: 100vh;
-`
-
-export const CreateAlbumContainer = styled.div`
-    display: flex;
-    height: 70vh;
-    flex-direction: column;
-    justify-content: center;
-`
-
-export const Img = styled.img`
-    margin: 0 auto;
-`
-
-export const CreateAlbumBox = styled.div`
-    width: 400px;
-    height: 350px;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    border: 2px solid white;
-    border-radius: 20px;
-    background-color: #F9F9F9;
-    opacity: 80%;
-`
-
-export const ContainerInputs = styled.div`
-    height: 200px;
-    padding: 0 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-`
-
-export const Title = styled.p`
-    margin:0;
-    padding: 0;
-    color: #323232;
     font-family: 'Roboto';
-    font-size: 1.2rem;
+`
+
+export const AlbumContainer = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+    margin: 15px;
+    flex-wrap: wrap;
+`
+
+export const StyledPaper = styled(Paper)`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    margin: 20px;
+    width: 440px;
+    height: 450px;
+`
+
+export const ButtonContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 `
 
 export const Button = styled.button`
@@ -65,7 +50,7 @@ export const LoadingContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 40px;
+	height: 50vh;
 
     @keyframes bounce {
 	0%, 50%, 100% {
@@ -84,20 +69,20 @@ export const LoadingContainer = styled.div`
 `
 
 export const Yellow = styled.div`
-    width: 1vw;
-	height: 1vw;
+    width: 3vw;
+	height: 3vw;
 	border-radius: 100%;
-	margin: 0.7vw;
+	margin: 2vw;
 	background-image: linear-gradient(145deg, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0) 100%);
     animation: bounce 1.5s 0.5s linear infinite;
     background-color: #feb60a;
 `
 
 export const Red = styled.div`
-    width: 1vw;
-	height: 1vw;
+    width: 3vw;
+	height: 3vw;
 	border-radius: 100%;
-	margin: 0.7vw;
+	margin: 2vw;
 	background-image: linear-gradient(145deg, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0) 100%);
     animation: bounce 1.5s 0.5s linear infinite;
     background-color: #ff0062;
@@ -105,10 +90,10 @@ export const Red = styled.div`
 `
 
 export const Blue = styled.div`
-    width: 1vw;
-	height: 1vw;
+    width: 3vw;
+	height: 3vw;
 	border-radius: 100%;
-	margin: 0.7vw;
+	margin: 2vw;
 	background-image: linear-gradient(145deg, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0) 100%);
     animation: bounce 1.5s 0.5s linear infinite;
     background-color: #00dbf9;
@@ -116,12 +101,24 @@ export const Blue = styled.div`
 `
 
 export const Violet = styled.div`
-    width: 1vw;
-	height: 1vw;
+    width: 3vw;
+	height: 3vw;
 	border-radius: 100%;
-	margin: 0.7vw;
+	margin: 2vw;
 	background-image: linear-gradient(145deg, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0) 100%);
     animation: bounce 1.5s 0.5s linear infinite;
     background-color: #da00f7;
     animation-delay: 0.3s;
+`
+
+export const NoAlbumContainer = styled.div`
+    padding-top: 30px;
+    font-family: 'Roboto';
+`
+
+export const ImageTitle = styled.h4`
+    margin: 0;
+    padding: 0;
+    padding-top: 10px;
+    font-family: 'Roboto'
 `

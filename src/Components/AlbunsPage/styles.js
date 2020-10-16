@@ -22,6 +22,7 @@ export const StyledPaper = styled(Paper)`
     margin: 20px;
     width: 440px;
     height: 450px;
+    cursor: pointer;
 `
 
 export const ButtonContainer = styled.div`

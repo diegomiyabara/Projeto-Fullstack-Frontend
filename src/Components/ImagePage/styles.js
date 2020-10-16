@@ -1,51 +1,23 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const MainContainer = styled.div`
-    background-color: #E9EAEA;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
 `
 
-export const CreateAlbumContainer = styled.div`
+export const ImageContainer = styled.div`
+    height: 100%;
+    flex: 1;
     display: flex;
-    height: 70vh;
     flex-direction: column;
     justify-content: center;
-`
-
-export const Img = styled.img`
-    margin: 0 auto;
-`
-
-export const CreateAlbumBox = styled.div`
-    width: 400px;
-    height: 350px;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    border: 2px solid white;
-    border-radius: 20px;
-    background-color: #F9F9F9;
-    opacity: 80%;
-`
-
-export const ContainerInputs = styled.div`
-    height: 200px;
-    padding: 0 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-`
-
-export const Title = styled.p`
-    margin:0;
-    padding: 0;
-    color: #323232;
-    font-family: 'Roboto';
-    font-size: 1.2rem;
+    align-items:center;
 `
 
 export const Button = styled.button`
+    margin: 0px auto;
+    margin-top: 30px;
     height: 40px;
     width: 180px;
     background-color: #323232;
@@ -65,7 +37,7 @@ export const LoadingContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 40px;
+	height: 50vh;
 
     @keyframes bounce {
 	0%, 50%, 100% {
@@ -84,20 +56,20 @@ export const LoadingContainer = styled.div`
 `
 
 export const Yellow = styled.div`
-    width: 1vw;
-	height: 1vw;
+    width: 3vw;
+	height: 3vw;
 	border-radius: 100%;
-	margin: 0.7vw;
+	margin: 2vw;
 	background-image: linear-gradient(145deg, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0) 100%);
     animation: bounce 1.5s 0.5s linear infinite;
     background-color: #feb60a;
 `
 
 export const Red = styled.div`
-    width: 1vw;
-	height: 1vw;
+    width: 3vw;
+	height: 3vw;
 	border-radius: 100%;
-	margin: 0.7vw;
+	margin: 2vw;
 	background-image: linear-gradient(145deg, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0) 100%);
     animation: bounce 1.5s 0.5s linear infinite;
     background-color: #ff0062;
@@ -105,10 +77,10 @@ export const Red = styled.div`
 `
 
 export const Blue = styled.div`
-    width: 1vw;
-	height: 1vw;
+    width: 3vw;
+	height: 3vw;
 	border-radius: 100%;
-	margin: 0.7vw;
+	margin: 2vw;
 	background-image: linear-gradient(145deg, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0) 100%);
     animation: bounce 1.5s 0.5s linear infinite;
     background-color: #00dbf9;
@@ -116,10 +88,10 @@ export const Blue = styled.div`
 `
 
 export const Violet = styled.div`
-    width: 1vw;
-	height: 1vw;
+    width: 3vw;
+	height: 3vw;
 	border-radius: 100%;
-	margin: 0.7vw;
+	margin: 2vw;
 	background-image: linear-gradient(145deg, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0) 100%);
     animation: bounce 1.5s 0.5s linear infinite;
     background-color: #da00f7;
