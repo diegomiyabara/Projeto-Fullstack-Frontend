@@ -31,6 +31,7 @@ export const ButtonContainer = styled.div`
 `
 
 export const Button = styled.button`
+    align-self: center;
     height: 40px;
     width: 180px;
     background-color: #323232;
@@ -120,5 +121,14 @@ export const ImageTitle = styled.h4`
     margin: 0;
     padding: 0;
     padding-top: 10px;
-    font-family: 'Roboto'
+    font-family: 'Roboto';
+`
+
+export const FilterContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 45vw;
 `

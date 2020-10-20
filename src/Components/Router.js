@@ -8,6 +8,7 @@ import Home from "./Home/index";
 import ImagePage from './ImagePage/index';
 import LoginPage from "./LoginPage/index";
 import SignupPage from "./SignUpPage/index"
+import UserListPage from './UserListPage';
 
 function Router() {
     return(
@@ -18,6 +19,9 @@ function Router() {
                 </Route>
                 <Route exact path = "/signup">
                     <SignupPage/>
+                </Route>
+                <Route exact path = "/users">
+                    <UserListPage />
                 </Route>
                 <Route exact path = "/albuns">
                     <AlbunsPage/>
