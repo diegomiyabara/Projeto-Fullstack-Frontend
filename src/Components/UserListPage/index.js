@@ -6,6 +6,7 @@ import Header from '../Header'
 
 const UserListPage = () => {
     const [users, setUsers] = useState()
+    const [friends, setFriends] = useState()
     const token = window.localStorage.getItem('token')
     const history = useHistory()
 
@@ -21,10 +22,17 @@ const UserListPage = () => {
             .then((response) => {
                 setUsers(response.data.Users)
             })
+            Axios.get('https://pic-memories.herokuapp.com/user/friends', {
+                headers: {
+                    Authorization: token
+                }
+            })
+            .then((response) => {
+                setFriends(response.data.Friends)
+            })
         }
     }, [token, history])
 
-    console.log(users)
     return(
         <div>
             <Header />
@@ -34,7 +42,13 @@ const UserListPage = () => {
                     return (
                         <StyledPaper>
                             <div>Nome: {user.name}</div>
-                            <button>Seguir</button>
+                            {friends && friends.map((friend) => {
+                                if(user.id === friend.friend_id) {
+                                    return <button>Deixar de seguir</button>
+                                } else {
+                                    return <button>Seguir</button>
+                                }
+                            })}
                         </StyledPaper>
                     )
                 })}

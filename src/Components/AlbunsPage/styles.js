@@ -34,6 +34,7 @@ export const ButtonContainer = styled.div`
 export const Button = styled.button`
     height: 40px;
     width: 180px;
+    margin: 0 5px;
     align-self: center;
     background-color: #323232;
     color: #F9F9F9;
@@ -125,4 +126,8 @@ export const FilterContainer = styled.div`
     margin: 0 auto;
     margin-top: 30px;
     width: 45vw;
+`
+
+export const MenuContainer = styled.div`
+    margin-top: 10px;
 `
