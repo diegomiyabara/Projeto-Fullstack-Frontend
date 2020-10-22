@@ -4,6 +4,8 @@ import AddImagePage from './AddImagePage';
 import AlbumDetailPage from './AlbumDetailPage';
 import AlbunsPage from './AlbunsPage';
 import CreateAlbumPage from './CreateAlbumPage';
+import FeedPage from './FeedPage';
+import FriendListPage from './FriendListPage';
 import Home from "./Home/index";
 import ImagePage from './ImagePage/index';
 import LoginPage from "./LoginPage/index";
@@ -23,6 +25,12 @@ function Router() {
                 <Route exact path = "/users">
                     <UserListPage />
                 </Route>
+                <Route exact path = "/feed">
+                    <FeedPage />
+                </Route>
+                <Route exact path = "/friends">
+                    <FriendListPage />
+                </Route>            
                 <Route exact path = "/albuns">
                     <AlbunsPage/>
                 </Route>

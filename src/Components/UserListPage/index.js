@@ -1,8 +1,9 @@
-import {StyledPaper} from './styles'
+import {StyledPaper, Button, NameContainer, Img} from './styles'
 import Axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import Header from '../Header'
+import ButtonBar from '../ButtonBar'
 
 const UserListPage = () => {
     const [users, setUsers] = useState()
@@ -33,22 +34,64 @@ const UserListPage = () => {
         }
     }, [token, history])
 
+    const followFriend = (friend_id) => {
+        const body = {
+            user_to_follow_id: friend_id
+        }
+        Axios.post('https://pic-memories.herokuapp.com/user/follow', body, {
+            headers: {
+                Authorization: token
+            }
+        })
+        .then(() => {
+            window.location.reload()
+        })
+    }
+
+    const unFollowFriend = (friend_id) => {
+        const body = {
+            user_to_unfollow_id: friend_id
+        }
+        Axios.post('https://pic-memories.herokuapp.com/user/unfollow', body, {
+            headers: {
+                Authorization: token
+            }
+        })
+        .then(() => {
+            window.location.reload()
+        })
+    }
+
+    const renderButton = (userId) => {
+        let checkFriend = false
+        friends && friends.find((friend) => {
+            if(friend.friend_id === userId) {
+                return checkFriend = true
+            } else {
+                return checkFriend = false
+            }
+        })
+        if(checkFriend === true){
+            return <Button onClick={() => unFollowFriend(userId)}>Seguindo</Button>
+        } else {
+            return <Button onClick={() => followFriend(userId)}>Seguir</Button>
+        }
+    }
+
     return(
         <div>
             <Header />
+            <ButtonBar />
             <div>
                 <h2>Usuários</h2>
                 {users && users.map((user) => {
                     return (
-                        <StyledPaper>
-                            <div>Nome: {user.name}</div>
-                            {friends && friends.map((friend) => {
-                                if(user.id === friend.friend_id) {
-                                    return <button>Deixar de seguir</button>
-                                } else {
-                                    return <button>Seguir</button>
-                                }
-                            })}
+                        <StyledPaper key={user.id}>
+                            <NameContainer>
+                                <Img src={user.photoUrl} height="35px"></Img>
+                                <p>Nome: {user.name}</p>
+                            </NameContainer>
+                            {renderButton(user.id)}
                         </StyledPaper>
                     )
                 })}

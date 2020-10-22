@@ -20,6 +20,49 @@ const AlbumDetailPage = () => {
         onChange(name, value)
     }
 
+    useEffect(() => {
+
+        if(token === null){
+            history.push("/login")
+        } else {
+            const config = {
+                headers: {
+                    Authorization: token
+                }
+            }
+            Axios.get(`${baseUrl}${params.albumId}`, config)
+            .then((res) => {
+                setImages(res.data.Images)
+            })
+            .catch((err) => {
+                console.log(err.message)
+            })
+
+        }
+    }, [token, history, params, baseUrl])
+
+    useEffect(() => {
+        Axios.get(`https://pic-memories.herokuapp.com/album/${params.albumId}`, {
+            headers: {
+                Authorization: token
+            }
+        })
+        .then((response) => {
+            setAlbum(response.data.Album)
+        })
+        .catch(err => {
+            console.log(err.message)
+        })
+    }, [history, token, params, baseUrl])
+
+    const goToAddImagePage = (albumId) => {
+        history.push(`/album/${albumId}/image`)
+    }
+
+    const goToImagePage = (imageId) => {
+        history.push(`/image/${imageId}`)
+    }
+
     const handleFilter = (e) => {
         e.preventDefault()
         const config = {
@@ -35,42 +78,6 @@ const AlbumDetailPage = () => {
         .catch((err) => {
             console.log(err)
         })
-    }
-
-    useEffect(() => {
-        if(token === null){
-            history.push("/login")
-        } else {
-            Axios.get(`${baseUrl}${params.albumId}`, {
-                headers: {
-                    Authorization: token
-                }
-            })
-            .then((response) => {
-                setImages(response.data.Images)
-            })
-            .catch(err => {
-                alert("Sua sessão expirou, realize o login novamente.")
-                window.localStorage.clear()
-                history.push("/login")
-            })
-            Axios.get(`https://pic-memories.herokuapp.com/album/${params.albumId}`, {
-                headers: {
-                    Authorization: token
-                }
-            })
-            .then((response) => {
-                setAlbum(response.data.Album)
-            })
-        }
-    }, [token, history, params, baseUrl])
-
-    const goToAddImagePage = (albumId) => {
-        history.push(`/album/${albumId}/image`)
-    }
-
-    const goToImagePage = (imageId) => {
-        history.push(`/image/${imageId}`)
     }
 
     return (

@@ -1,11 +1,12 @@
 import Axios from 'axios';
 import React, {useEffect, useState} from 'react'
 import { useHistory } from 'react-router-dom'
-import {MainContainer, AlbumContainer, StyledPaper, ButtonContainer, Button, LoadingContainer, Yellow, Red, Blue, Violet, NoAlbumContainer, FilterContainer, MenuContainer} from './styles'
+import {MainContainer, AlbumContainer, StyledPaper, ButtonContainer, Button, LoadingContainer, Yellow, Red, Blue, Violet, NoAlbumContainer, FilterContainer} from './styles'
 import Header from '../Header'
 import { FormControl, InputLabel, Select, TextField } from '@material-ui/core'
 import notFoundImage from '../../Images/not-found.png'
 import useForm from '../../Hooks/useForm'
+import ButtonBar from '../ButtonBar';
 
 const AlbunsPage = () => {
     const {form, onChange, resetForm} = useForm({albumHash:"", dateFilter: "DESC"})
@@ -46,18 +47,6 @@ const AlbunsPage = () => {
         history.push(`/album/${albumId}`)
     }
 
-    const goToFeedPage = (albumId) => {
-        history.push(`/feed`)
-    }
-
-    const goToUsersPage = (albumId) => {
-        history.push(`/users`)
-    }
-
-    const goToFriendsPage = (albumId) => {
-        history.push(`/friends`)
-    }
-
     const handleFilter = (e) => {
         e.preventDefault()
         const config = {
@@ -78,11 +67,7 @@ const AlbunsPage = () => {
     return(
         <MainContainer>
             <Header/>
-            <MenuContainer>
-                <Button onClick={goToFeedPage}>Feed</Button>
-                <Button onClick={goToUsersPage}>Usuários</Button>
-                <Button onClick={goToFriendsPage}>Amigos</Button>
-            </MenuContainer>
+            <ButtonBar />
             <h2>Álbuns</h2>
             <ButtonContainer><Button onClick={goToCreateAlbumPage}>Novo Álbum</Button></ButtonContainer>
             <form onSubmit={handleFilter}>
