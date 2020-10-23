@@ -46,7 +46,7 @@ function LoginPage() {
         axios.post(`${baseUrl}/login`, body)
         .then(response => {
             window.localStorage.setItem("token", response.data.token)
-            history.push("/albuns")
+            history.push("/feed")
         })
         .catch(err => {
             alert("Usuário/email ou senha inválidos!")

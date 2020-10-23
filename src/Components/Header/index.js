@@ -14,6 +14,9 @@ function Header() {
     const goToAlbunsPage = () => {
         history.push("/albuns")
     }
+    const goToHomePage = () => {
+        history.push('/')
+    }
     const handleLogout = () => {
         window.localStorage.clear()
         history.push("/")
@@ -31,7 +34,7 @@ function Header() {
         } else {
             return(
                 <ButtonContainer>
-                    <Button onClick={goToAlbunsPage}>Álbuns</Button>
+                    <Button onClick={goToAlbunsPage}>Meus Álbuns</Button>
                     <Button onClick={handleLogout}>Logout</Button>
                 </ButtonContainer>
             )
@@ -39,7 +42,7 @@ function Header() {
     }
     return(
         <MainContainer>
-            <LogoImg src={logo}/>
+            <LogoImg src={logo} onClick={goToHomePage}/>
             <h2>Pic Memories</h2>
             {renderButton()}
         </MainContainer>
