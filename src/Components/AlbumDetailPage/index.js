@@ -10,6 +10,7 @@ const AlbumDetailPage = () => {
     const {form, onChange, resetForm} = useForm({albumHash:"", dateFilter: "DESC"})
     const history = useHistory();
     const params = useParams();
+    const [user, setUser] = useState()
     const [images, setImages] = useState();
     const [album, setAlbum] = useState();
     const baseUrl = "https://pic-memories.herokuapp.com/image/?albumId="
@@ -54,6 +55,21 @@ const AlbumDetailPage = () => {
         })
     }, [history, token, params, baseUrl])
 
+    useEffect(()=> {
+        if(token === null) {
+            history.push('/login')
+        }else {
+            Axios.get(`https://pic-memories.herokuapp.com/user/info`, {
+                headers: {
+                    Authorization: token
+                }
+            })
+            .then((response) => {
+                setUser(response.data.User)
+            })
+        }
+    },[history, token])
+
     const goToAddImagePage = (albumId) => {
         history.push(`/album/${albumId}/image`)
     }
@@ -79,11 +95,24 @@ const AlbumDetailPage = () => {
         })
     }
 
+    const renderNewPhotoButton = () => {
+        let checkUser = false
+        if((album && album.user_id) === (user && user.id)){
+            checkUser = true
+        }
+
+        if(checkUser === true) {
+            return (
+                <ButtonContainer><Button onClick={() => goToAddImagePage(album.id)}>Adicionar Foto</Button></ButtonContainer>
+            )
+        }
+    }
+
     return (
         <MainContainer>
             <Header/>
             <h2>{album && album.name}</h2>
-            <ButtonContainer><Button onClick={() => goToAddImagePage(album.id)}>Adicionar Foto</Button></ButtonContainer>
+            {renderNewPhotoButton()}
             <form onSubmit={handleFilter}>
                 <FilterContainer>
                     <TextField 
@@ -119,7 +148,7 @@ const AlbumDetailPage = () => {
                 {!images ? <LoadingContainer><Yellow></Yellow><Red></Red><Blue></Blue><Violet></Violet></LoadingContainer> : images.length === 0 ? <NoAlbumContainer>Nenhuma foto encontrada!</NoAlbumContainer> : images.map((image) => {
                     return(
                         <StyledPaper elevation={3} key={image.id}>
-                            <img src={image.photoUrl} alt="Album" width="400px" cursor="pointer" onClick={() => goToImagePage(image.id)}/>
+                            <img src={image.photoUrl} alt="Album" max-width="400px" max-height="400px" cursor="pointer" onClick={() => goToImagePage(image.id)}/>
                             <ImageTitle>{image.description}</ImageTitle>
                         </StyledPaper>
                     )

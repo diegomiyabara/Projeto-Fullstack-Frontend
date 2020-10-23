@@ -25,10 +25,6 @@ const FriendListPage = () => {
         }
     }, [token, history])
 
-    const goToAlbumPage = (friend_id) => {
-        history.push('')
-    }
-
     console.log(friends)
     return (
         <div>
@@ -38,7 +34,7 @@ const FriendListPage = () => {
                 <h2>Amigos</h2>
                 {friends && friends.map((friend) => {
                     return (
-                        <StyledPaper key={friend.id} onClick={() => goToAlbumPage(friend.id)}>
+                        <StyledPaper key={friend.id}>
                             <Img src={friend.photoUrl}></Img>
                             <p>{friend.name}</p>
                         </StyledPaper>

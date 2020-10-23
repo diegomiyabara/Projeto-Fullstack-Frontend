@@ -13,7 +13,7 @@ const AlbunsPage = () => {
     const history = useHistory();
     const [albuns, setAlbuns] = useState()
     const token = window.localStorage.getItem('token')
-    const baseUrl = "https://pic-memories.herokuapp.com/album"
+    const baseUrl = "https://pic-memories.herokuapp.com"
     const handleInputChange = event => {
         const {name, value} = event.target
         onChange(name, value)
@@ -23,7 +23,7 @@ const AlbunsPage = () => {
         if(token === null){
             history.push("/login")
         } else {
-            Axios.get(`${baseUrl}/`, {
+            Axios.get(`${baseUrl}/album/`, {
                 headers: {
                     Authorization: token
                 }
@@ -58,9 +58,6 @@ const AlbunsPage = () => {
         .then((res) => {
             setAlbuns(res.data.Albuns)
             resetForm()
-        })
-        .catch((err) => {
-            console.log(err)
         })
     }
 
