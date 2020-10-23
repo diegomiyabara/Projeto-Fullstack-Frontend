@@ -1,47 +1,41 @@
-import Axios from 'axios';
-import React, {useEffect, useState} from 'react'
+import Axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import {MainContainer, AlbumContainer, StyledPaper, ButtonContainer, Button, LoadingContainer, Yellow, Red, Blue, Violet, NoAlbumContainer, FilterContainer} from './styles'
-import Header from '../Header'
+import {AlbumContainer, LoadingContainer, Red, Yellow, Blue, Violet, NoAlbumContainer, StyledPaper, TitleContainer, UserContainer, Title, Img, FilterContainer, Button} from './styles'
 import { FormControl, InputLabel, Select, TextField } from '@material-ui/core'
-import notFoundImage from '../../Images/not-found.png'
+import Header from '../Header'
+import ButtonBar from '../ButtonBar'
 import useForm from '../../Hooks/useForm'
-import ButtonBar from '../ButtonBar';
+import notFoundImage from '../../Images/not-found.png'
 
-const AlbunsPage = () => {
-    const {form, onChange, resetForm} = useForm({albumHash:"", dateFilter: "DESC"})
-    const history = useHistory();
-    const [albuns, setAlbuns] = useState()
+const FeedPage = () => {
+    const [feed, setFeed] = useState()
     const token = window.localStorage.getItem('token')
-    const baseUrl = "https://pic-memories.herokuapp.com"
+    const history = useHistory()
+    const {form, onChange, resetForm} = useForm({nameHash:"", dateFilter: "DESC"})
+    
     const handleInputChange = event => {
         const {name, value} = event.target
         onChange(name, value)
     }
 
     useEffect(() => {
-        if(token === null){
+        if(!token) {
             history.push("/login")
         } else {
-            Axios.get(`${baseUrl}/album/`, {
+            Axios.get('https://pic-memories.herokuapp.com/user/feed', {
                 headers: {
                     Authorization: token
                 }
             })
             .then((response) => {
-                setAlbuns(response.data.Albuns)
+                setFeed(response.data.Feed)
             })
             .catch((err) => {
-                alert("Sessão expirada, realize um novo login!")
-                window.localStorage.clear()
-                history.push("/login")
+                console.log(err.message)
             })
         }
-    }, [history, token])
-
-    const goToCreateAlbumPage = () => {
-        history.push("/albuns/new")
-    }
+    }, [token, history])
 
     const goToAlbumDetailPage = (albumId) => {
         history.push(`/album/${albumId}`)
@@ -49,32 +43,32 @@ const AlbunsPage = () => {
 
     const handleFilter = (e) => {
         e.preventDefault()
+        console.log("filtrando")
         const config = {
             headers: {
                 Authorization: token
             }
         }
-        Axios.get(`${baseUrl}/?hashtag=${form.albumHash}&orderDate=${form.dateFilter}`, config)
+        Axios.get(`https://pic-memories.herokuapp.com/user/feed?name=${form.nameHash}&orderBy=${form.dateFilter}`, config)
         .then((res) => {
-            setAlbuns(res.data.Albuns)
+            setFeed(res.data.Feed)
             resetForm()
         })
     }
 
     return(
-        <MainContainer>
-            <Header/>
+        <div>
+            <Header />
             <ButtonBar />
-            <h2>Álbuns</h2>
-            <ButtonContainer><Button onClick={goToCreateAlbumPage}>Novo Álbum</Button></ButtonContainer>
+            <h2>Feed</h2>
             <form onSubmit={handleFilter}>
                 <FilterContainer>
                     <TextField 
-                    label="Nome do álbum" 
+                    label="Nome do usuário" 
                     variant="outlined"
                     type="text"
-                    name="albumHash"
-                    placeholder="Busque pelo nome do álbum"
+                    name="nameHash"
+                    placeholder="Busque por usuário"
                     value={form.albumHash}
                     onChange={handleInputChange}
                     />
@@ -99,18 +93,25 @@ const AlbunsPage = () => {
                 </FilterContainer>
             </form>
             <AlbumContainer>
-                {!albuns ? <LoadingContainer><Yellow></Yellow><Red></Red><Blue></Blue><Violet></Violet></LoadingContainer> : albuns.length === 0 ? <NoAlbumContainer>Você não possui nenhum álbum!</NoAlbumContainer> : albuns.map((album) => {
+                {!feed ? <LoadingContainer><Yellow></Yellow><Red></Red><Blue></Blue><Violet></Violet></LoadingContainer> : feed.length === 0 ? <NoAlbumContainer>Você não possui nenhum álbum!</NoAlbumContainer> : feed.map((post) => {
                     return(
-                        <StyledPaper elevation={3} key={album.id} onClick={() => goToAlbumDetailPage(album.id)}>
-                            <h4>{album.name}</h4>
-                            {album.albumImageUrl === "" ? <img src={notFoundImage} width="400px" alt="Not found"/> : <img src={album.albumImageUrl} alt="Album" width="400px" />}
-                            <p>{album.description}</p>
+                        <StyledPaper elevation={3} key={post.album_id} onClick={() => goToAlbumDetailPage(post.album_id)}>
+                            <TitleContainer>
+                                <UserContainer>
+                                    <Img height="25px" src={post.user_photo} />
+                                    <p>{post.name}</p>
+                                </UserContainer>
+                                <Title>{post.album_name}</Title>
+                                <div></div>
+                            </TitleContainer>                            
+                            {post.album_imageUrl === "" ? <img src={notFoundImage} width="400px" height="300px" alt=""/> : <img src={post.album_imageUrl} alt="Album" width="400px" height="300px"/>}
+                            <p>{post.album_description}</p>
                         </StyledPaper>
                     )
                 })}
             </AlbumContainer>
-        </MainContainer>
+        </div>
     )
 }
 
-export default AlbunsPage
+export default FeedPage

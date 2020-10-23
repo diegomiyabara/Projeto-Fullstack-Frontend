@@ -24,9 +24,7 @@ const ImagePage = () => {
                 setImage(response.data)
             })
             .catch(err => {
-                alert("Sua sessão expirou, realize o login novamente.")
-                window.localStorage.clear()
-                history.push("/login")
+                console.log(err.message)
             })
     }}, [baseUrl, params, token, history])
 

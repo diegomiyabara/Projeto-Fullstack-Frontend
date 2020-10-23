@@ -34,6 +34,8 @@ export const ButtonContainer = styled.div`
 export const Button = styled.button`
     height: 40px;
     width: 180px;
+    margin: 0 5px;
+    align-self: center;
     background-color: #323232;
     color: #F9F9F9;
     border-radius: 5px;
@@ -115,4 +117,17 @@ export const Violet = styled.div`
 export const NoAlbumContainer = styled.div`
     padding-top: 30px;
     font-family: 'Roboto';
+`
+
+export const FilterContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 45vw;
+`
+
+export const MenuContainer = styled.div`
+    margin-top: 10px;
 `

@@ -43,7 +43,7 @@ const CreateAlbumPage = () => {
         const body = {
             name: form.name,
             description: form.description,
-            albumImageUrl: form.albumImageUrl,
+            albumImageUrl: form.albumImageUrl
         }
         axios.post(`${baseUrl}/`,body, {
             headers: {
