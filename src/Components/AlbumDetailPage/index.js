@@ -21,7 +21,6 @@ const AlbumDetailPage = () => {
     }
 
     useEffect(() => {
-
         if(token === null){
             history.push("/login")
         } else {

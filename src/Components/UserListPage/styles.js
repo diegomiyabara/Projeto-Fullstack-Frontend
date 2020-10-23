@@ -38,3 +38,28 @@ export const Img = styled.img`
     border-radius: 100%;
     margin-right: 15px;
 `
+
+export const FilterContainer = styled.div`
+    width: 450px;
+    display: flex;
+    align-items:center;
+    justify-content: space-evenly;
+    margin: 0 auto;
+`
+
+export const FilterButton = styled.button`
+    height: 45px;
+    width: 110px;
+    margin: 0 5px;
+    align-self: center;
+    background-color: #323232;
+    color: #F9F9F9;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8em;
+    :hover {
+        color: #F9F9F9;
+        opacity: 90%;
+    }
+`
