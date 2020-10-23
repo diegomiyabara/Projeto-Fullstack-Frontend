@@ -112,15 +112,16 @@ export const Title = styled.h4`
 
 export const UserContainer = styled.div`
     display: flex;
-    width: 130px;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     font-weight: 600;
+    margin-right: 10px;
 `
 
 export const Img = styled.img`
     border-radius: 100%;
+    margin-right: 10px;
 `
 
 export const FilterContainer = styled.div`

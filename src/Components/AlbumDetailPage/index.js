@@ -148,7 +148,7 @@ const AlbumDetailPage = () => {
                 {!images ? <LoadingContainer><Yellow></Yellow><Red></Red><Blue></Blue><Violet></Violet></LoadingContainer> : images.length === 0 ? <NoAlbumContainer>Nenhuma foto encontrada!</NoAlbumContainer> : images.map((image) => {
                     return(
                         <StyledPaper elevation={3} key={image.id}>
-                            <img src={image.photoUrl} alt="Album" max-width="400px" max-height="400px" cursor="pointer" onClick={() => goToImagePage(image.id)}/>
+                            <img src={image.photoUrl} alt="Album" width="400" cursor="pointer" onClick={() => goToImagePage(image.id)}/>
                             <ImageTitle>{image.description}</ImageTitle>
                         </StyledPaper>
                     )
