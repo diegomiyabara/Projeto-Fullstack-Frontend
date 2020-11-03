@@ -1,4 +1,4 @@
-<h1 align="center"> Pic Memories </h1>
+<h1 align="center"> 🪐Pic Memories🪐 </h1>
 
 <p align="center"><img src="https://img.shields.io/static/v1?label=react&message=framework&color=blue&style=flat&logo=REACT"/>
 <img src="https://img.shields.io/static/v1?label=styled-components&message=lib&color=pink&style=flat&logo=STYLED-COMPONENTS"/>
