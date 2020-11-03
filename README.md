@@ -52,7 +52,6 @@
     2. Acesse a pasta na qual foi clonado
     3. `npm install` para instalar todas as dependências
     4. `npm run start` para rodas localmente o projeto
-        -OBS: Abrir no navegador como mobile
     5. `npm run build` para gerar uma versão estática do projeto (que ficará na pasta `build`)
     
 ## Libs utilizadas :books:
